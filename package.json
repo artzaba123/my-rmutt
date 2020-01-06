@@ -12,14 +12,20 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@nuxtjs/apollo": "^4.0.0-rc19",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-link": "^1.2.13",
+    "apollo-link-http": "^1.5.16",
     "apollo-server-koa": "^2.9.15",
     "bcrypt": "^3.0.7",
     "cross-env": "^5.2.0",
     "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "koa": "^2.6.2",
     "mongoose": "^5.8.4",
+    "node-fetch": "^2.6.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {

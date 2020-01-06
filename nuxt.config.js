@@ -1,4 +1,9 @@
+// const { HttpLink } = require('apollo-link-http')
+// const { InMemoryCache } = require('apollo-cache-inmemory')
 const colors = require('vuetify/es5/util/colors').default
+// const fetch = require('node-fetch')
+// Replace this with your project's endpoint
+// const GRAPHCMS_API = 'http://localhost:3000/graphql'
 
 module.exports = {
   mode: 'universal',
@@ -46,7 +51,9 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // https://github.com/nuxt-community/apollo-module
+    '@nuxtjs/apollo'
   ],
   /*
    ** Axios module configuration
@@ -71,6 +78,13 @@ module.exports = {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
         }
+      }
+    }
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:3000/graphql'
       }
     }
   },
