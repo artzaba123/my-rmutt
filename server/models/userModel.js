@@ -24,8 +24,23 @@ const userSchema = new mongoose.Schema({
     default: true
   },
   personalInfo: {
+    nickname: String,
     firstnameEN: String,
-    lastnameEN: String
+    lastnameEN: String,
+    firstnameTH: String,
+    lastnameTH: String,
+    email: String,
+    facebook: String,
+    lineID: String,
+    phone: String,
+    DOB: Date
+  },
+  careerInfo: {
+    email: String,
+    phone: String,
+    jobPost: String,
+    dapartment: String,
+    address: String
   }
 })
 

@@ -1,5 +1,4 @@
-// const consola = require('consola')
-
+const { GraphQLDate } = require('graphql-iso-date')
 module.exports = {
   Query: {
     hello: () => 'Hello World',
@@ -14,5 +13,6 @@ module.exports = {
       userModel.findOneAndUpdate({ username }, params, { new: true }).exec(),
     deleteUser: (_, { username }, { models: { userModel } }) =>
       userModel.findOneAndDelete({ username }).exec()
-  }
+  },
+  Date: GraphQLDate
 }

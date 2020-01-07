@@ -6,17 +6,36 @@ module.exports = gql`
     username: String!
     password: String!
     personalInfo: PersonalInfo
-    userType: UserType!
+    careerInfo: CareerInfo
+    userType: UserTypeEnum!
     isPublic: Boolean!
     isActive: Boolean!
   }
 
   type PersonalInfo {
+    nickname: String
     firstnameEN: String
     lastnameEN: String
+    firstnameTH: String
+    lastnameTH: String
+    email: String
+    facebook: String
+    lineID: String
+    phone: String
+    DOB: Date
   }
 
-  enum UserType {
+  type CareerInfo {
+    email: String
+    phone: String
+    jobPost: String
+    dapartment: String
+    address: String
+  }
+
+  scalar Date
+
+  enum UserTypeEnum {
     USER
     ADMIN
   }
@@ -33,12 +52,29 @@ module.exports = gql`
   }
 
   input PersonalInfoInput {
+    nickname: String
     firstnameEN: String
     lastnameEN: String
+    firstnameTH: String
+    lastnameTH: String
+    email: String
+    facebook: String
+    lineID: String
+    phone: String
+    DOB: Date
+  }
+
+  input CareerInfoInput {
+    email: String
+    phone: String
+    jobPost: String
+    dapartment: String
+    address: String
   }
 
   input UpdateUserInput {
     personalInfo: PersonalInfoInput
+    careerInfo: CareerInfoInput
   }
 
   extend type Mutation {
