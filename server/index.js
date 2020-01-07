@@ -60,7 +60,7 @@ async function start() {
   db.on('error', () => {
     consola.info('connect error')
   })
-  db.once('open', function() {
+  db.once('open', function () {
     consola.success('db connected')
   })
   app.listen(port, host)

@@ -4,6 +4,7 @@ const colors = require('vuetify/es5/util/colors').default
 // const fetch = require('node-fetch')
 // Replace this with your project's endpoint
 // const GRAPHCMS_API = 'http://localhost:3000/graphql'
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -84,7 +85,9 @@ module.exports = {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:3000/graphql'
+        httpEndpoint: process.server
+          ? 'http://localhost:3000/graphql'
+          : '/graphql'
       }
     }
   },
@@ -95,6 +98,6 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 }

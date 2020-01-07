@@ -21,9 +21,19 @@ module.exports = gql`
     user(userName: String): User!
   }
 
+  input CreateUserInput {
+    userName: String!
+    password: String!
+  }
+
+  input UpdateUserInput {
+    firstName: String
+    lastName: String
+  }
+
   extend type Mutation {
-    createUser(userName: String!, password: String!): User!
-    updateUser(userName: String!, firstName: String, lastName: String): User!
+    createUser(params: CreateUserInput): User!
+    updateUser(userName: String!, params: UpdateUserInput): User!
     deleteUser(userName: String!): User!
   }
 `
