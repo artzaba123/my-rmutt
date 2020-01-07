@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-  userName: {
+  username: {
     type: String,
     required: true,
     unique: true
@@ -10,12 +10,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  firstName: String,
-  lastName: String,
   userType: {
     type: String,
     enum: ['USER', 'ADMIN'],
     default: 'USER'
+  },
+  isPublic: {
+    type: Boolean,
+    default: true
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  personalInfo: {
+    firstnameEN: String,
+    lastnameEN: String
   }
 })
 

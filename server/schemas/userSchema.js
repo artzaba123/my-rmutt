@@ -3,11 +3,17 @@ const { gql } = require('apollo-server-koa')
 module.exports = gql`
   type User {
     id: ID!
-    userName: String!
+    username: String!
     password: String!
-    firstName: String
-    lastName: String
+    personalInfo: PersonalInfo
     userType: UserType!
+    isPublic: Boolean!
+    isActive: Boolean!
+  }
+
+  type PersonalInfo {
+    firstnameEN: String
+    lastnameEN: String
   }
 
   enum UserType {
@@ -18,22 +24,26 @@ module.exports = gql`
   extend type Query {
     hello: String
     users: [User!]!
-    user(userName: String): User!
+    user(username: String): User!
   }
 
   input CreateUserInput {
-    userName: String!
+    username: String!
     password: String!
   }
 
+  input PersonalInfoInput {
+    firstnameEN: String
+    lastnameEN: String
+  }
+
   input UpdateUserInput {
-    firstName: String
-    lastName: String
+    personalInfo: PersonalInfoInput
   }
 
   extend type Mutation {
     createUser(params: CreateUserInput): User!
-    updateUser(userName: String!, params: UpdateUserInput): User!
-    deleteUser(userName: String!): User!
+    updateUser(username: String!, params: UpdateUserInput): User!
+    deleteUser(username: String!): User!
   }
 `
