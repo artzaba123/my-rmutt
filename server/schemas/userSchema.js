@@ -3,14 +3,39 @@ const { gql } = require('apollo-server-koa')
 module.exports = gql`
   type User {
     id: ID!
-    userName: String!
+    username: String!
     password: String!
-    firstName: String
-    lastName: String
-    userType: UserType!
+    personalInfo: PersonalInfo
+    careerInfo: CareerInfo
+    userType: UserTypeEnum!
+    isPublic: Boolean!
+    isActive: Boolean!
   }
 
-  enum UserType {
+  type PersonalInfo {
+    nickname: String
+    firstnameEN: String
+    lastnameEN: String
+    firstnameTH: String
+    lastnameTH: String
+    email: String
+    facebook: String
+    lineID: String
+    phone: String
+    DOB: Date
+  }
+
+  type CareerInfo {
+    email: String
+    phone: String
+    jobPost: String
+    dapartment: String
+    address: String
+  }
+
+  scalar Date
+
+  enum UserTypeEnum {
     USER
     ADMIN
   }
@@ -18,22 +43,43 @@ module.exports = gql`
   extend type Query {
     hello: String
     users: [User!]!
-    user(userName: String): User!
+    user(username: String): User!
   }
 
   input CreateUserInput {
-    userName: String!
+    username: String!
     password: String!
   }
 
+  input PersonalInfoInput {
+    nickname: String
+    firstnameEN: String
+    lastnameEN: String
+    firstnameTH: String
+    lastnameTH: String
+    email: String
+    facebook: String
+    lineID: String
+    phone: String
+    DOB: Date
+  }
+
+  input CareerInfoInput {
+    email: String
+    phone: String
+    jobPost: String
+    dapartment: String
+    address: String
+  }
+
   input UpdateUserInput {
-    firstName: String
-    lastName: String
+    personalInfo: PersonalInfoInput
+    careerInfo: CareerInfoInput
   }
 
   extend type Mutation {
     createUser(params: CreateUserInput): User!
-    updateUser(userName: String!, params: UpdateUserInput): User!
-    deleteUser(userName: String!): User!
+    updateUser(username: String!, params: UpdateUserInput): User!
+    deleteUser(username: String!): User!
   }
 `
