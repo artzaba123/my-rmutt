@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
     facebook: String,
     lineID: String,
     phone: String,
+    showPhone: {
+      type: Boolean,
+      default: false
+    },
     DOB: Date
   },
   careerInfo: {

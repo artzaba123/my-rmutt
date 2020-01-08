@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <div>
+    <div v-if="!this.$apollo.loading">
       <h1>
         ข้อมูลส่วนตัว
       </h1>
@@ -25,68 +25,100 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="firstname"
+              v-model="user.personalInfo.firstnameTH"
               outlined
               label="ชื่อ"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="lastname"
+              v-model="user.personalInfo.lastnameTH"
               outlined
               label="นามสกุล"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="telephone"
+              v-model="user.personalInfo.phone"
               outlined
               label="เบอร์ติดต่อ"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-switch
-              v-model="switch1"
+              v-model="user.personalInfo.showPhone"
               :label="`${switch1 ? 'เผยแพร่' : 'ไม่เผยแพร่'}`"
             ></v-switch>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="email"
-              :rule="emailRules"
+              v-model="user.personalInfo.email"
               outlined
               label="E-mail"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="facebook"
+              v-model="user.personalInfo.facebook"
               outlined
               label="Facebook"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="lineid"
+              v-model="user.personalInfo.lineID"
               outlined
               label="Line ID"
             ></v-text-field>
           </v-col>
-          <v-col cols="12"> <v-btn>ยืนยัน</v-btn></v-col>
+          <v-col cols="12"> <v-btn @click="updateUser">ยืนยัน</v-btn></v-col>
         </v-row>
       </v-container>
     </div>
+    <div v-else>Loading...</div>
   </v-layout>
 </template>
 <script>
+import { GET_USER_BY_ID } from '@/graphql/queries/userQueries'
+import { UPDATE_USER_MUTATION } from '@/graphql/mutations/userMutation'
+
 export default {
-  data() {
-    return { switch1: true }
+  apollo: {
+    user: {
+      query: GET_USER_BY_ID,
+      variables: {
+        username: 'tao'
+      }
+    }
   },
-  email: '',
-  emailRules: [
-    (v) => !!v || 'E-mail is required',
-    (v) => /.+@.+/.test(v) || 'E-mail must be valid'
-  ]
+  data: () => ({
+    switch1: true,
+    loading: true,
+    user: []
+  }),
+
+  methods: {
+    async updateUser() {
+      // eslint-disable-next-line no-console
+      const newUser = this.user
+      delete newUser.__typename
+      delete newUser.personalInfo.__typename
+      delete newUser.id
+      try {
+        const res = await this.$apollo.mutate({
+          mutation: UPDATE_USER_MUTATION,
+          variables: {
+            username: 'tao',
+            params: newUser
+          }
+        })
+        // eslint-disable-next-line no-console
+        console.log(res)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(JSON.parse(JSON.stringify(error)))
+      }
+    }
+  }
 }
 </script>

@@ -83,6 +83,7 @@ module.exports = {
     }
   },
   apollo: {
+    errorHandler: '~/plugins/apollo-error-handler.js',
     clientConfigs: {
       default: {
         httpEndpoint: process.server
@@ -98,6 +99,6 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 }

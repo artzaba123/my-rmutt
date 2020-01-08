@@ -22,6 +22,7 @@ module.exports = gql`
     facebook: String
     lineID: String
     phone: String
+    showPhone: Boolean
     DOB: Date
   }
 
@@ -51,6 +52,11 @@ module.exports = gql`
     password: String!
   }
 
+  input UpdateUserInput {
+    personalInfo: PersonalInfoInput
+    careerInfo: CareerInfoInput
+  }
+
   input PersonalInfoInput {
     nickname: String
     firstnameEN: String
@@ -61,6 +67,7 @@ module.exports = gql`
     facebook: String
     lineID: String
     phone: String
+    showPhone: Boolean
     DOB: Date
   }
 
@@ -70,11 +77,6 @@ module.exports = gql`
     jobPost: String
     dapartment: String
     address: String
-  }
-
-  input UpdateUserInput {
-    personalInfo: PersonalInfoInput
-    careerInfo: CareerInfoInput
   }
 
   extend type Mutation {
