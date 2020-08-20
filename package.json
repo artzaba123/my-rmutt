@@ -20,7 +20,7 @@
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
     "apollo-server-koa": "^2.9.15",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "cross-env": "^5.2.0",
     "graphql": "^14.5.8",
     "graphql-iso-date": "^3.6.1",
